@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Shopping</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="fragment_library_title">LIBRARY</string>
+    <string name="fragment_shopping_cart_title">SHOPPING CART</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="temp_text">Dialog Fragment</string>
+
+
+</resources>
