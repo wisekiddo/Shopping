@@ -14,12 +14,15 @@ import com.wisekiddo.shopping.controller.fragment.AddCartFragment;
 import com.wisekiddo.shopping.controller.fragment.DiscountListFragment;
 import com.wisekiddo.shopping.controller.fragment.ItemListFragment;
 import com.wisekiddo.shopping.controller.fragment.LibraryFragment;
+import com.wisekiddo.shopping.controller.fragment.ShoppingCartFragment;
 import com.wisekiddo.shopping.model.CartItem;
 import com.wisekiddo.shopping.model.Discount;
 import com.wisekiddo.shopping.model.Item;
 import com.wisekiddo.shopping.model.Library;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -34,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements
 
     private FragmentManager fm = getFragmentManager();
     private List<Item> itemList;
+    private List<CartItem> cartItemList;
 
     private ItemListFragment itemListFragment = new ItemListFragment();
     private DiscountListFragment discountListFragment = new DiscountListFragment();
+    private ShoppingCartFragment shoppingCartFragment = new ShoppingCartFragment();
     private AddCartFragment addCartFragment;
     private FragmentTransaction fragmentTransaction;
 
@@ -46,20 +51,20 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        loadCurrencies();
+
         addCartFragment = (AddCartFragment) getFragmentManager().findFragmentById(R.id.fragmentTop);
+        shoppingCartFragment = (ShoppingCartFragment) getFragmentManager().findFragmentById(R.id.fragmentRight);
+
+        cartItemList = new ArrayList<>();
 
         showAddCard(false);
-
-        loadCurrencies();
     }
-
 
     @Override
     public void onLibraryFragmentInteraction(Library item){
 
-        Log.i("MAIN", item.getName());
-
-        fragmentTransaction= fm.beginTransaction();
+        fragmentTransaction = fm.beginTransaction();
 
         if(item.getId()==0) {
             fragmentTransaction.replace(R.id.fragmentLeft, discountListFragment ,null);
@@ -74,39 +79,46 @@ public class MainActivity extends AppCompatActivity implements
 		fragmentTransaction.commit();
     }
 
+    //ITEMS INTERACTION
+    @Override
+    public void onItemListFragmentInteraction(Item item){
+        showAddCard(true);
+        addCartFragment.selectedItem(item.getId());
+    }
+
     @Override
     public void onDiscountFragmentInteraction(Discount item){
 
     }
 
     @Override
-    public void onItemListFragmentInteraction(Item item){
-
-        Log.i("ITEMLIST",item.getId()+"");
-
-        showAddCard(true);
-
-        addCartFragment.addCart(item.getId());
-
+    public void onAddCardFragmentInteraction(CartItem item){
+        shoppingCartFragment.addItem(item);
     }
 
-
-
     private void loadCurrencies(){
+
+        final Random random = new Random();
+        final Integer min = 10, max=100;
 
         ApiService api = RetroClient.getApiService();
 
         Call<List<Item>> call = api.getItems();
 
         call.enqueue(new Callback<List<Item>>(){
+            int randomNum;
             @Override
             public void onResponse(Call<List<Item>> call, Response<List<Item>> response){
 
                 if(response.isSuccessful()){
                     itemList = response.body();
+                    for(int i=0;i<itemList.size();i++){
+                        randomNum = random.nextInt((max - min) + 1) + min;
+                        itemList.get(i).setPrice( (double) randomNum);
+                        Application.getInstance().mapItem.put(itemList.get(i).getId(), itemList.get(i));
+                    }
+
                     Application.getInstance().itemList = response.body();
-
-
 
                 }else{
                     Log.i("ListView","NOT LOADING");
@@ -117,14 +129,6 @@ public class MainActivity extends AppCompatActivity implements
                 Log.i("LIST VIEW","DISMISS" + t);
             }
         });
-    }
-
-
-
-    @Override
-    public void onAddCardFragmentInteraction(CartItem item){
-        Log.i("CHECK",item.getTitle());
-
     }
 
     @Override
@@ -141,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements
         }else{
             fragmentTransaction.hide(addCartFragment);
         }
-
 
         fragmentTransaction.commit();
     }

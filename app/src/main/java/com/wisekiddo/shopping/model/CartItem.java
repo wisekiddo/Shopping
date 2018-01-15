@@ -9,41 +9,28 @@ import java.util.Random;
 
 public class CartItem {
 
-
-    @SerializedName("albumId")
-    @Expose
     private Integer albumId;
-
-    @SerializedName("id")
-    @Expose
     private Integer id;
-
-    @SerializedName("title")
-    @Expose
     private String title;
+    private String itemId;
 
-    @SerializedName("url")
-    @Expose
+    private String name;
     private String url;
-
-    @SerializedName("thumbnailUrl")
-    @Expose
     private String thumbnailUrl;
-
     private Double price;
     private Integer quantity;
-
-
-
     private Double discount;
 
 
+    public String getItemId() {return itemId;}
+    public void setItemId(String itemId) {this.itemId = itemId;}
 
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
 
     public Integer getAlbumId() {
         return albumId;
     }
-
     public void setAlbumId(Integer albumId) {
         this.albumId = albumId;
     }
@@ -51,16 +38,11 @@ public class CartItem {
     public Integer getId() {
         return id;
     }
-
-    public void setId(Integer id) {
-
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -68,7 +50,6 @@ public class CartItem {
     public String getUrl() {
         return url;
     }
-
     public void setUrl(String url) {
         this.url = url;
     }
@@ -76,27 +57,18 @@ public class CartItem {
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
-
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
 
-
     public Double getPrice() {
         return price;
     }
-
-    public void setPrice(Double price) {
-
-        this.price = price;
-    }
-
-
+    public void setPrice(Double price) {this.price = price;}
 
     public Integer getQuantity() {
         return quantity;
     }
-
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -104,9 +76,6 @@ public class CartItem {
     public Double getDiscount() {
         return discount;
     }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
+    public void setDiscount(Double discount) {this.discount = discount;}
 
 }

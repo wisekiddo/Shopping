@@ -1,28 +1,25 @@
 package com.wisekiddo.shopping.controller.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.wisekiddo.shopping.Application;
 import com.wisekiddo.shopping.R;
 import com.wisekiddo.shopping.controller.fragment.ShoppingCartFragment.OnListFragmentInteractionListener;
-import com.wisekiddo.shopping.controller.fragment.dummy.DummyContent.DummyItem;
+import com.wisekiddo.shopping.model.CartItem;
 
-import java.util.List;
+import java.util.ArrayList;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ShoppingCartRecyclerViewAdapter extends RecyclerView.Adapter<ShoppingCartRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final ArrayList<CartItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public ShoppingCartRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public ShoppingCartRecyclerViewAdapter(ArrayList<CartItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,9 +33,14 @@ public class ShoppingCartRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
+        if(mValues.get(position).getPrice() != null) {
+            Double totalItemPrice = mValues.get(position).getPrice() * mValues.get(position).getQuantity();
+
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mNameView.setText(mValues.get(position).getName());
+        holder.mQuantityView.setText("x"+mValues.get(position).getQuantity());
+        holder.mPriceView.setText("$ "+totalItemPrice);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,7 @@ public class ShoppingCartRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
                 }
             }
         });
+        }
     }
 
     @Override
@@ -57,22 +60,62 @@ public class ShoppingCartRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
         return mValues.size();
     }
 
+    public void updateCart(CartItem item){
+
+        boolean same=false;
+        if(mValues.size()>0){
+
+            for(int i=0;i<mValues.size();i++){
+
+                if(mValues.get(i).getItemId().equals(item.getItemId())){
+                    Log.i("--->",mValues.get(i).getItemId() +"=="+item.getItemId());
+
+                    mValues.get(i).setQuantity(mValues.get(i).getQuantity() + item.getQuantity());
+                    same=true;
+                    break;
+                }
+            }
+
+
+
+
+        }
+
+        if(!same){
+            Application.getInstance().cartItem.put("item"+item.getId()+item.getDiscount(),item);
+            mValues.add(item);
+        }
+
+
+        notifyDataSetChanged();
+    }
+
+    public void clear(){
+        mValues.clear();
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mNameView;
+        public final TextView mQuantityView;
+        public final TextView mPriceView;
+        public CartItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mNameView = (TextView) view.findViewById(R.id.name);
+            mQuantityView = (TextView) view.findViewById(R.id.quantity);
+            mPriceView = (TextView) view.findViewById(R.id.price);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + "'";
         }
+
     }
+
 }

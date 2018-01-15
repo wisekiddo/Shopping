@@ -10,21 +10,40 @@
         android:layout_height="50dp"
         android:layout_width="50dp"
         android:layout_margin="5dp"
+        android:gravity="left"
         android:layout_gravity="center_vertical"
         android:src="@drawable/rectangle" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="100dp"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:layout_weight="1"
+        android:gravity="left"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            android:textSize="8sp"
+
+            android:textAppearance="?attr/textAppearanceListItem" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_weight="1"
+        android:gravity="right"
         android:textAppearance="?attr/textAppearanceListItem" />
 
 

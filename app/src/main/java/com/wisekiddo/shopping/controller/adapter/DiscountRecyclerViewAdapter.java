@@ -39,9 +39,9 @@ public class DiscountRecyclerViewAdapter extends RecyclerView.Adapter<DiscountRe
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onDiscountFragmentInteraction(holder.mItem);
-                }
+            if (null != mListener) {
+                mListener.onDiscountFragmentInteraction(holder.mItem);
+            }
             }
         });
     }
@@ -52,6 +52,7 @@ public class DiscountRecyclerViewAdapter extends RecyclerView.Adapter<DiscountRe
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         public final View mView;
         public final TextView mIdView; //REPLACE WITH IMAGEVIEW
         public final TextView mNameView;
@@ -70,5 +71,7 @@ public class DiscountRecyclerViewAdapter extends RecyclerView.Adapter<DiscountRe
         public String toString() {
             return super.toString() + " '" + mNameView.getText() + "'";
         }
+
     }
+
 }

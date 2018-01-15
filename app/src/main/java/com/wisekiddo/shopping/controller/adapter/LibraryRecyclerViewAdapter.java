@@ -10,9 +10,7 @@ import com.wisekiddo.shopping.R;
 import com.wisekiddo.shopping.controller.fragment.LibraryFragment.OnListFragmentInteractionListener;
 import com.wisekiddo.shopping.model.Library;
 
-
 import java.util.List;
-
 
 public class LibraryRecyclerViewAdapter extends RecyclerView.Adapter<LibraryRecyclerViewAdapter.ViewHolder> {
 
@@ -26,8 +24,7 @@ public class LibraryRecyclerViewAdapter extends RecyclerView.Adapter<LibraryRecy
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_library_cell, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_library_cell, parent,false);
         return new ViewHolder(view);
     }
 

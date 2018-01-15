@@ -25,13 +25,8 @@ public class LibraryFragment extends Fragment {
     public LibraryFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static LibraryFragment newInstance(int columnCount) {
         LibraryFragment fragment = new LibraryFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -53,10 +48,8 @@ public class LibraryFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new LibraryRecyclerViewAdapter(LibraryContent.ITEMS, mListener));
 
-
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -75,9 +68,7 @@ public class LibraryFragment extends Fragment {
         mListener = null;
     }
 
-
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onLibraryFragmentInteraction(Library item);
     }
 }

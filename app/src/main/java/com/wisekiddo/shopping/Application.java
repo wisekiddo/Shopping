@@ -2,9 +2,12 @@ package com.wisekiddo.shopping;
 
 //import com.wisekiddo.rxandroidcurrency.model.Currency;
 
+import com.wisekiddo.shopping.model.CartItem;
 import com.wisekiddo.shopping.model.Item;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ronaldbernardo on 23/12/17.
@@ -18,14 +21,10 @@ public class Application {
     }
 
     public List<Item> itemList;
-    // public Currency baseCode;
-    // public Currency targetCode;
+    public List<CartItem> cartItemList;
 
-    public String baseCode ="USD";
-    public String targetCode ="EUR";
-
-    public int selectedPosition;
-    public Double defaultValue=1.00;
+    public Map<Integer, Item> mapItem = new HashMap<Integer, Item>();
+    public Map<String, CartItem> cartItem = new HashMap<String, CartItem>();
 
     private Application() {
 
