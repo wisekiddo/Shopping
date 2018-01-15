@@ -57,9 +57,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-
             android:layout_margin="10dp"
+
+            android:layout_marginTop="70dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -112,8 +112,8 @@
                     android:layout_width="120dp"
                     android:layout_height="35dp"
                     android:layout_gravity="left"
-                    android:layout_weight="2"
                     android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
 
                     android:background="@color/colorWhite"
                     android:text="+"
@@ -135,6 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:checked="true"
                 android:text="ToggleButton"
                 tools:text="Discount A (0%)" />
 
@@ -171,7 +172,43 @@
                 tools:text="Discount A (0%)" />
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:textSize="9sp"
+                android:text="Discount A(0%)" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:text="Discount B(10%)"
+                android:textSize="9sp" />
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:textSize="9sp"
+                android:text="Discount C(35.5%)" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:textSize="9sp"
+                android:text="Discount D(50%)" />
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:textSize="9sp"
+                android:text="Discount E(100%)" />
+        </LinearLayout>
+
+        </LinearLayout>
 
 
 </LinearLayout>
